@@ -1,5 +1,5 @@
 function LineChartDate() {
-    var margin = {top: 10, right: 10, bottom: 20, left: 80},
+    var margin = {top: 10, right: 10, bottom: 40, left: 80},
         width = 960 - margin.left - margin.right,
         height = 350 - margin.top - margin.bottom,
         yvalue = 'values',
@@ -12,10 +12,10 @@ function LineChartDate() {
 
     function chart(selection) {
 
-        var parseTime = d3.timeParse(dateformat),
-            xScale = d3.scaleTime().rangeRound([0, width]),
+        var xScale = d3.scaleTime().rangeRound([0, width]),
             yScale = d3.scaleLinear().rangeRound([height, 0]);
 
+        var parseTime = d3.timeParse('%Y-%m-%d');
         var bisectDate = d3.bisector(function(d) { return d[xvalue]; }).left
 
         var line = d3.line()
@@ -35,18 +35,19 @@ function LineChartDate() {
             });
 
             data.forEach(function(d){
-                d[xvalue] = parseTime(d[xvalue]);
+                d.jsdate = parseTime(d['date']);
                 d.min =  9999999999;
                 d.max = -9999999999;
                 yvalue.forEach(function(j, i){
-                    dataT[i]['values'].push({'x': d[xvalue], 'y': +d[j]})
+                    dataT[i]['values'].push({'x': d.jsdate, 'y': +d[j]})
                     if (d[j] < d.min) d.min = +d[j];
                     if (d[j] > d.max) d.max = +d[j];
                 })
             });
 
+
             // Domains
-            xScale.domain(d3.extent(data, function(d) { return d[xvalue]; }));
+            xScale.domain(d3.extent(data, function(d) { return d.jsdate; }));
 
             if(ydomain == 'extent'){
                 yScale.domain([d3.min(data, function(d) { return d.min;}), d3.max(data, function(d) { return d.max;})]);
@@ -73,14 +74,6 @@ function LineChartDate() {
             g.append("g")
                 .attr("class", "axis axis--y")
                 .call(d3.axisLeft(yScale));
-                /*
-                .append("text")
-                .attr("transform", "rotate(-90)")
-                .attr("y", 6)
-                .attr("dy", "0.71em")
-                .attr("fill", "#000")
-                .text("Temperature, ºF");
-                */
 
 
             var lineg = g.selectAll(".lineg")
@@ -94,6 +87,27 @@ function LineChartDate() {
                 .attr("d", function(d) {
                     return line(d.values);
                 });
+
+            var leyg = g.append('g')
+                .attr('class', 'leyend')
+                .selectAll('g')
+                .data(yvalue)
+                .enter().append('g')
+                .attr("transform", function(d, i){
+                    return "translate("+(85*i)+", " + (height+(margin.top + 30)) + ")";
+                })
+
+            leyg.append('rect')
+                .attr('width', 12)
+                .attr('height', 12)
+                .attr('y', -10)
+                .style("fill", function(d, i) { return colorScale(i); });
+
+            leyg.append("text")
+                .attr('x', 16)
+                .style('font-size', '12px')
+                .text(function(d,i) { return d.slice(0,5); });
+
         });
     }
 
@@ -129,24 +143,6 @@ function LineChartDate() {
             if(typeof value == 'string') yvalue = [value];
             else if(Array.isArray(value)) yvalue = value;
             else return yvalue;
-        }
-        return chart;
-    };
-
-    chart.xvalue = function(value) {
-        if (!arguments.length || typeof value != 'string') {
-            return xvalue;
-        } else {
-            xvalue = value;
-        }
-        return chart;
-    };
-
-    chart.dateformat = function(value) {
-        if (!arguments.length || typeof value != 'string') {
-            return dateformat;
-        } else {
-            dateformat = value;
         }
         return chart;
     };

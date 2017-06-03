@@ -1,27 +1,66 @@
 <!DOCTYPE html>
 <meta charset="utf-8">
 
-<link rel="stylesheet" href="/assets/css/style.css">
+<link href="https://fonts.googleapis.com/css?family=Lato:300,400,900" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css">
 
-<div id="noticias"></div>
-<div id="inversion"></div>
+<div class="main">
+  <h1 class="title">Call of data</h1>
+  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Perspiciatis, ratione in. Ratione iste, molestiae, minus perferendis esse pariatur minima soluta accusamus voluptatem iusto consequuntur, praesentium modi. Sunt praesentium magni nisi.</p>
+  <div class="section">
+    <h2>Noticias ABC</h2>
+    <div id="noticias"></div>
+  </div>
+  <div class="section">
+    <h2>Titulares ABC</h2>
+    <div id="titulares"></div>
+  </div>
+  <div class="section">
+    <h2>Inversión española</h2>
+    <div id="inversion"></div>
+  </div>
+</div>
+
+
 
 <script src="https://d3js.org/d3.v4.js"></script>
-<script src="/assets/js/d3.linechart.js"></script>
+<script src="assets/js/d3.linechart.js"></script>
 <script>
-  colors = ['red', 'blue'];
+  colors = ['#ff9000', '#6898f9'];
 
-  d3.csv('data.csv', function(datas){
+  d3.csv('assets/data/data.csv', function(datas){
 
     d3.select('#noticias')
         .datum(datas)
         .call(LineChartDate()
-            .yvalue(['siria_i', 'haiti_i'])
+            .yvalue(['siria', 'haiti'])
             .ydomain('0max')
-            .xvalue('date')
-            .dateformat('%Y-%m-%d')
             .colors(colors)
             .curve('curveBasis')
             .width('#noticias'));
+
+
+    d3.select('#titulares')
+        .datum(datas)
+        .call(LineChartDate()
+            .yvalue(['siria_t', 'haiti_t'])
+            .ydomain('0max')
+            .colors(colors)
+            .curve('curveBasis')
+            .width('#titulares'));
+
+
+
+    d3.select('#inversion')
+        .datum(datas)
+        .call(LineChartDate()
+            .yvalue(['siria_i', 'haiti_i'])
+            .ydomain('0max')
+            .colors(colors)
+            .curve('curveBasis')
+            .width('#inversion'));
+
+
+
   })
 </script>
