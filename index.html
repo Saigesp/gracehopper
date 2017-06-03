@@ -6,19 +6,31 @@
 
 <div class="main">
   <h1 class="title">Call of data</h1>
-  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Perspiciatis, ratione in. Ratione iste, molestiae, minus perferendis esse pariatur minima soluta accusamus voluptatem iusto consequuntur, praesentium modi. Sunt praesentium magni nisi.</p>
-  <div class="section">
-    <h2>Noticias ABC</h2>
-    <div id="noticias"></div>
-  </div>
-  <div class="section">
-    <h2>Titulares ABC</h2>
-    <div id="titulares"></div>
-  </div>
-  <div class="section">
-    <h2>Inversión española</h2>
-    <div id="inversion"></div>
-  </div>
+  <p>Proyecto de análisis exploratorio de datos para el dataton <a href="http://www.callofdata.info/">Call of Data</a>, organizado por <a href="https://twitter.com/rladiesmad?lang=es">R-Ladies Madrid</a>.</p>
+  <p>Se han comparado los datos facilitados por <a href="http://realidadayuda.org/">La realidad de la ayuda</a>, una iniciativa de <a href="http://www.oxfamintermon.org/">Oxfam Intermón</a>, con las noticias obtenidas de la página web de <a href="http://www.abc.es/">ABC</a>, con el fin de mostrar la correlación entre la Ayuda Oficial al Desarrollo (AOD) y la aparición en medios de comunicación de las regiones que reciben dicha ayuda.</p>
+  <p><strong>Autores</strong></p>
+  <p><a href="https://twitter.com/poltriascoca?lang=es">@poltriascoca</a>, <a href="https://twitter.com/LaDarsenaEst?lang=es">@LaDarsenaEst</a>, <a href="https://twitter.com/AmaiaSaezLavin">@AmaiaSaezLavin</a>, <a href="https://twitter.com/Saigesp">@Saigesp</a>.</p>
+  <p><strong>Metodología</strong></p>
+  <p>Debido a la falta de tiempo, se ha decidido analizar los datos de inversiones desde el año 2000 para los países de Siria y Haití, debido a la repercusión en nuestro país de las crisis (<a href="https://es.wikipedia.org/wiki/Terremoto_de_Hait%C3%AD_de_2010">Terremoto de Haití de 2010</a> y <a href="https://es.wikipedia.org/wiki/Guerra_Civil_Siria">Guerra Civil Siria de 2011</a>) que tuvieron lugar en dichos países. Se ha decidido así mismo obtener los datón únicamte de ABC, debido a la facilidad para acceder a su <a href="www.abc.es/hemeroteca/">hemeroteca</a>.</p>
+  <p>Para la obtención de las noticias, se han tenido en cuenta los resultados de la propia búsqueda de la hemeroteca, así como las noticias de dicha selección que contenían las palabras "Siria" o "Haití" en su titular.</p>
+  <p>Para ĺos datos de las ayudas al desarrollo, se han usado los <a href="http://realidadayuda.org/analizar-la-ayuda/a-donde-va-la-ayuda">ofrecidos</a> por la iniciativa de Oxfam Intermón.</p>
+  <p><strong>Herramientas</strong></p>
+  <p>Para la obtención de los datos, así como para su procesamiento se ha usado Python y MongoDB, y para su visualización, D3.</p>
+  <h2>Noticias ABC</h2>
+  <p><strong>Análisis</strong></p>
+  <p>Se han obtenido los datos de noticias (apariciones, titular y fecha) de la hemeroteca de ABC y se han agrupado de forma anual.</p>
+  <div id="noticias"></div>
+  <p><br>Se observa claramente la diferencia de repercusión de dichos países, tanto en volumen de noticias como en duración en el tiempo. No obstante, si filtramos dichos datos por noticias en cuyo titular se encuentra el nombre del país, Siria cae drásticamente, posiblemente debido a la "especialización" de los titulares, que dejan de nombrar al páis y pasan a nombrar ciudades o territorios concretos.</p>
+  <h2>Titulares ABC</h2>
+  <div id="titulares"></div>
+  <p></p>
+  <p>Con la inversión observamos un patrón totalmente distinto, obteniendo Haití unos órdenes hasta 10 veces mayores que Siria, pese a tener una cifras de fallecidos notáblemente inferior (<a href="https://es.wikipedia.org/wiki/Terremoto_de_Hait%C3%AD_de_2010">316.000</a> frente a <a href="https://es.wikipedia.org/wiki/Guerra_Civil_Siria">470.000</a>).</p>
+  <h2>Inversión española</h2>
+  <div id="inversion"></div>
+  <p><br></p>
+  <p><strong>Conclusiones</strong></p>
+  <p>Pese a ser una ligera exploración de los datos, se observa cláramente la no correlación de la importancia de un país para los medios de comunicación frente a las ayudas para el desarrollo recibidas.</p>
+  <p>En un siguiente análisis sería interesante comprobar a qué es debido dicha no correlación haciendo un análisis de otras crisis humanitarias, si se debe a factores políticos, a factores relacionados con el tipo de crisis, debido al momento en que suceden, u otros factores.</p>
 </div>
 
 

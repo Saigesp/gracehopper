@@ -79,6 +79,10 @@ mark, ins {background: transparent; text-decoration: none;}
     font-family: 'Lato', sans-serif;
 }
 
+a {
+    color: rgb(104, 152, 249);
+}
+
 .main {
     padding: 20px;
     max-width: 900px;
