@@ -1,0 +1,8 @@
+  .chart {
+
+  }
+  
+  .chart .line {
+    fill: transparent;
+    stroke-width: 3px;
+  }
